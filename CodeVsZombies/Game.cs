@@ -2,7 +2,7 @@
 
 namespace CodeVsZombies
 {
-    class Game
+    public class Game
     {
         public const int Width = 16000;
         public const int Height = 9000;

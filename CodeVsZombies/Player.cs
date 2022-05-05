@@ -1,5 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using CodeVsZombies.Strategies;
+using Common;
+using System;
 
 namespace CodeVsZombies
 {
@@ -9,7 +10,6 @@ namespace CodeVsZombies
         {
             Game game = new Game();
 
-            // game loop
             while (true)
             {
                 game.SetAsh(Console.ReadLine().Split(' '));
@@ -26,15 +26,9 @@ namespace CodeVsZombies
                     game.AddZombie(i, Console.ReadLine().Split(' '));
                 }
 
-                // Write an action using Console.WriteLine()
-                // To debug: Console.Error.WriteLine("Debug messages...");
+                IStrategy strategy = new MoveToClosestZombie(game);
 
-                var zombies = game.Zombies.OrderBy(z => z.Position.DistanceFrom(game.Ash));
-
-                if (zombies.Any())
-                    game.Ash.Move(zombies.First().Position);
-                else
-                    game.Ash.Wait();
+                strategy.Act();
             }
         }
     }
