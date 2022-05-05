@@ -1,49 +1,41 @@
 ﻿using System;
 using System.Linq;
-using System.IO;
-using System.Text;
-using System.Collections;
-using System.Collections.Generic;
 
-/**
- * Save humans, destroy zombies!
- **/
-class Player
+namespace CodeVsZombies
 {
-    static void Main(string[] args)
+    public class Player
     {
-        string[] inputs;
-
-        // game loop
-        while (true)
+        static void Main()
         {
-            inputs = Console.ReadLine().Split(' ');
-            int x = int.Parse(inputs[0]);
-            int y = int.Parse(inputs[1]);
-            int humanCount = int.Parse(Console.ReadLine());
-            for (int i = 0; i < humanCount; i++)
+            Game game = new Game();
+
+            // game loop
+            while (true)
             {
-                inputs = Console.ReadLine().Split(' ');
-                int humanId = int.Parse(inputs[0]);
-                int humanX = int.Parse(inputs[1]);
-                int humanY = int.Parse(inputs[2]);
+                game.SetAsh(Console.ReadLine().Split(' '));
+
+                game.SetHumanCount(int.Parse(Console.ReadLine()));
+                for (int i = 0; i < game.HumanCount; i++)
+                {
+                    game.AddHuman(i, Console.ReadLine().Split(' '));
+                }
+
+                game.SetZombieCount(int.Parse(Console.ReadLine()));
+                for (int i = 0; i < game.ZombieCount; i++)
+                {
+                    game.AddZombie(i, Console.ReadLine().Split(' '));
+                }
+
+                // Write an action using Console.WriteLine()
+                // To debug: Console.Error.WriteLine("Debug messages...");
+
+                var zombies = game.Zombies.OrderBy(z => z.Position.DistanceFrom(game.Ash));
+
+                if (zombies.Any())
+                    game.Ash.Move(zombies.First().Position);
+                else
+                    game.Ash.Wait();
             }
-            int zombieCount = int.Parse(Console.ReadLine());
-            for (int i = 0; i < zombieCount; i++)
-            {
-                inputs = Console.ReadLine().Split(' ');
-                int zombieId = int.Parse(inputs[0]);
-                int zombieX = int.Parse(inputs[1]);
-                int zombieY = int.Parse(inputs[2]);
-                int zombieXNext = int.Parse(inputs[3]);
-                int zombieYNext = int.Parse(inputs[4]);
-            }
-
-            // Write an action using Console.WriteLine()
-            // To debug: Console.Error.WriteLine("Debug messages...");
-
-            Console.WriteLine("0 0"); // Your destination coordinates
-
         }
     }
 }

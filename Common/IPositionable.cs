@@ -1,4 +1,7 @@
-﻿public interface IPositionable
+﻿namespace Common
 {
-    public Point Position { get; }
+    public interface IPositionable
+    {
+        public Point Position { get; }
+    }
 }
