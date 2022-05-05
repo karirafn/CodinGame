@@ -26,7 +26,7 @@ namespace CodeVsZombies
                     game.AddZombie(i, Console.ReadLine().Split(' '));
                 }
 
-                IStrategy strategy = new MoveToClosestZombie(game);
+                IStrategy strategy = new MoveToClosestHuman(game);
 
                 strategy.Act();
             }
