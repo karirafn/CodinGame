@@ -20,5 +20,8 @@ namespace CodeVsZombies
         public int Id { get; }
         public Point Position { get; }
         public Point Destination { get; set; }
+
+        public bool IsHeadedTo(Human human)
+            => new Vector(human.Position, Position).Contains(Destination);
     }
 }

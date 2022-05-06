@@ -1,6 +1,4 @@
-﻿using CodeVsZombies.Strategies;
-using Common;
-using System;
+﻿using System;
 
 namespace CodeVsZombies
 {
@@ -26,9 +24,7 @@ namespace CodeVsZombies
                     game.AddZombie(i, Console.ReadLine().Split(' '));
                 }
 
-                IStrategy strategy = new MoveToClosestHuman(game);
-
-                strategy.Act();
+                Strategy.MoveToClosestSavableHuman(game);
             }
         }
     }
